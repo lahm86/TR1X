@@ -50,7 +50,7 @@ static void M_Initialise(
     }
 
     int16_t box_num = sector->box;
-    if (!(g_Boxes[box_num].overlap_index & BOX_BLOCKABLE)) {
+    if (!(Box_GetBox(box_num)->overlap_index & BOX_BLOCKABLE)) {
         box_num = NO_BOX;
     }
     door_pos->block = box_num;
@@ -76,7 +76,7 @@ void Door_Shut(DOORPOS_DATA *const d)
 
     const int16_t box_num = d->block;
     if (box_num != NO_BOX) {
-        g_Boxes[box_num].overlap_index |= BOX_BLOCKED;
+        Box_GetBox(box_num)->overlap_index |= BOX_BLOCKED;
     }
 }
 
@@ -90,7 +90,7 @@ void Door_Open(DOORPOS_DATA *const d)
 
     const int16_t box_num = d->block;
     if (box_num != NO_BOX) {
-        g_Boxes[box_num].overlap_index &= ~BOX_BLOCKED;
+        Box_GetBox(box_num)->overlap_index &= ~BOX_BLOCKED;
     }
 }
 
